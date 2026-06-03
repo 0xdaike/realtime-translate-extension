@@ -14,6 +14,20 @@ Service modes:
 
 The initial implementation target is a Chrome Manifest V3 extension built with Vite, React, and TypeScript.
 
+## Project Status
+
+This repository is public open source under the MIT License. The current release is `v0.1.0`, an MVP for local Chrome extension builds and manual QA.
+
+This project is not intended to be published as an npm package. `package.json` keeps `"private": true` as a guard against accidental package publication; distribution is expected through built Chrome extension artifacts.
+
+## Why This Matters
+
+Realtime translation can make browser meetings, online classes, videos, webinars, and livestreams more accessible across languages. This project focuses on a privacy-minded BYOK model where users keep control of provider accounts and the extension avoids storing audio or transcript content.
+
+## Maintainer
+
+This project is maintained by `0xdaike`. Current planning is tracked in [TASKS.md](./TASKS.md) and public GitHub issues.
+
 ## Important Warnings
 
 - Bring your own OpenAI or Soniox API key. API usage is billed to your own provider account.
