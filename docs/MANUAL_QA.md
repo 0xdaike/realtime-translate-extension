@@ -2,6 +2,22 @@
 
 Use this checklist after `npm run build`. Do not paste real API keys into logs, screenshots, issues, or pull requests.
 
+## Evidence Handling
+
+Allowed QA evidence:
+
+- Extension status text.
+- Provider name and target language.
+- Browser/version and OS/version.
+- Redacted errors.
+- Screenshots with no API keys, account identifiers, meeting names, participants, or private transcript text.
+
+Do not attach:
+
+- Real API keys or temporary credentials.
+- Console output containing `Authorization`, `client_secret`, `session_token`, `api_key`, or transcript content.
+- Meeting recordings, participant names, customer names, private subtitles, or browser profile data.
+
 ## Build And Load
 
 1. Run `npm install` if dependencies are not installed.
@@ -21,6 +37,22 @@ Use this checklist after `npm run build`. Do not paste real API keys into logs, 
 5. Confirm the popup shows that the Soniox key is available.
 6. Optional: if an OpenAI key is available later, switch the translation engine to OpenAI and confirm key availability is tracked separately.
 7. Optional: switch to `encrypted_local`, save with a passphrase, lock, unlock, and delete the key.
+
+## Browser Audio Scenario Matrix
+
+| Scenario | Provider | Expected result | Notes |
+|---|---|---|---|
+| YouTube video | Soniox | Translated subtitles appear; no translated voice is expected | Current lowest-cost real QA path |
+| YouTube video | OpenAI | Translated subtitles and translated audio appear | Requires funded OpenAI Realtime access |
+| Google Meet web | Soniox | Captured meeting audio produces translated subtitles | Run only with allowed test meetings |
+| Microsoft Teams Web | Soniox | Captured meeting audio produces translated subtitles | Run only with allowed test meetings |
+| Zoom Web | Soniox | Captured meeting audio produces translated subtitles | Run only with allowed test meetings |
+| Online course/webinar/livestream | Soniox | Speaker audio produces translated subtitles | Use public or owned test content |
+| Tab close during session | Any connected provider | Session stops, overlay is removed, capture ends | No stale active session should remain |
+| Extension reload during idle state | Any configured provider | No active session is restored unexpectedly | Confirm key state remains expected |
+| Provider error response | Any provider | Error is actionable and redacted | No API key, temporary key, token, or transcript in message |
+
+Record pass/fail per scenario, browser version, provider, and target language. Do not record private transcript text.
 
 ## Managed Mode Smoke Test
 
@@ -118,6 +150,7 @@ Only run this with meetings where translation by the selected provider is allowe
 8. Confirm Soniox offscreen sessions receive only a short-lived temporary key.
 9. Confirm Managed offscreen sessions receive only a short-lived managed session token.
 10. Search `dist/` for real API keys before sharing a build.
+11. If installed, run `gitleaks detect --source . --redact` or `trufflehog git file://. --only-verified` before publishing release evidence.
 
 ## Troubleshooting
 

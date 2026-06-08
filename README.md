@@ -56,6 +56,8 @@ npm run build
 
 The build output is written to `dist/`. Load that directory from `chrome://extensions` with "Load unpacked" after a successful build.
 
+See [CONTRIBUTING.md](./CONTRIBUTING.md) before opening changes that include screenshots, provider credentials, logs, or QA evidence.
+
 ## Usage
 
 1. Build the extension.
